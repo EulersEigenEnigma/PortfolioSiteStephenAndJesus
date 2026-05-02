@@ -1,0 +1,13 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 550" width="550" height="550">
+	<style>
+		.s0 { opacity: .28;fill: #000000 } 
+		.s1 { fill: none;stroke: #ffffff;stroke-linecap: round;stroke-linejoin: round;stroke-width: 27 } 
+		.s2 { opacity: .15;fill: #000000 } 
+	</style>
+	<g id="DesignAnimations">
+		<path id="Shape 7" fill-rule="evenodd" class="s0" d="m504 142v254h-456v-254z"/>
+		<path id="Shape 4" fill-rule="evenodd" class="s1" d="m512.4 132v273.85h-474.4v-273.85z"/>
+		<path id="Shape 6" fill-rule="evenodd" class="s2" d="m339.91 274.73l-97.96 56.6-0.04-113.14z"/>
+		<path id="Shape 5" fill-rule="evenodd" class="s1" d="m354.54 272.39l-120.13 73.29-3.41-140.68z"/>
+	</g>
+</svg>

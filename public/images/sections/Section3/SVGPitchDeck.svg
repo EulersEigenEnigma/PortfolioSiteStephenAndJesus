@@ -1,0 +1,13 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 550" width="550" height="550">
+	<style>
+		.s0 { opacity: .28;fill: #000000 } 
+		.s1 { fill: none;stroke: #ffffff;stroke-linecap: round;stroke-linejoin: round;stroke-width: 27 } 
+		.s2 { fill: #000000;stroke: #ffffff;stroke-linecap: round;stroke-linejoin: round;stroke-width: 27 } 
+	</style>
+	<g id="PitchDeck">
+		<path id="Shape 3" fill-rule="evenodd" class="s0" d="m487.08 87.39v281.54h-426.34v-281.54z"/>
+		<path id="Shape 1" fill-rule="evenodd" class="s1" d="m496.15 79.35v294.17h-443.45v-294.17z"/>
+		<path id="Shape 2" fill-rule="evenodd" class="s2" d="m266.25 382.26l5.13-2.86 81.12 145.08-5.13 2.87z"/>
+		<path id="Shape 2 copy" fill-rule="evenodd" class="s2" d="m261.56 380.29l5.13 2.87-81.11 145.08-5.13-2.87z"/>
+	</g>
+</svg>
