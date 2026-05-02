@@ -70,7 +70,7 @@ export default function Section5Footer() {
           width: "100%",
           background: "#000000",
           borderTop: "2px solid #C9963A",
-          padding: "clamp(28px, 4vh, 52px) clamp(24px, 7vw, 100px)",
+          padding: "clamp(16px, 2.5vh, 32px) clamp(20px, 5vw, 70px)",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
@@ -81,43 +81,99 @@ export default function Section5Footer() {
         {/* Left — contact details */}
         <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           {[
-            { text: "Stephen Abraham", bold: true },
-            { text: "lkjmo12@gmail.com", bold: false },
-            { text: "+91-9220901193", bold: false },
-            { text: "linkedin.com/in/sa3465", bold: false },
-          ].map(({ text, bold }, i) => (
-            <p
-              key={i}
-              style={{
-                fontFamily: "var(--font-primary)",
-                fontSize: "clamp(13px, 1.1vw, 17px)",
-                fontWeight: bold ? "700" : "500",
-                letterSpacing: bold ? "0.1em" : "0.04em",
-                textTransform: bold ? "uppercase" : "none",
-                color: "#C9963A",
-                margin: 0,
-              }}
-            >
-              {text}
-            </p>
-          ))}
+            { text: "Stephen Abraham", bold: true, link: null },
+            { text: "lkjmo12@gmail.com", bold: false, link: null },
+            { text: "+91-9220901193", bold: false, link: null },
+            { text: "linkedin.com/in/sa3465", bold: false, link: "https://www.linkedin.com/in/sa3465/" },
+          ].map(({ text, bold, link }, i) =>
+            link ? (
+              <a
+                key={i}
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  fontFamily: "var(--font-primary)",
+                  fontSize: "clamp(11px, 0.85vw, 13px)",
+                  fontWeight: "500",
+                  letterSpacing: "0.04em",
+                  color: "#C9963A",
+                  textDecoration: "none",
+                  margin: 0,
+                  cursor: "pointer",
+                }}
+              >
+                {text}
+              </a>
+            ) : (
+              <p
+                key={i}
+                style={{
+                  fontFamily: "var(--font-primary)",
+                  fontSize: "clamp(11px, 0.85vw, 13px)",
+                  fontWeight: bold ? "700" : "500",
+                  letterSpacing: bold ? "0.1em" : "0.04em",
+                  textTransform: bold ? "uppercase" : "none",
+                  color: "#C9963A",
+                  margin: 0,
+                }}
+              >
+                {text}
+              </p>
+            )
+          )}
         </div>
 
-        {/* Right — site logo */}
-        <div
-          style={{
-            position: "relative",
-            width: "clamp(80px, 9vw, 140px)",
-            aspectRatio: "1 / 1",
-            flexShrink: 0,
-          }}
-        >
-          <Image
-            src="/images/sections/SplashScreen/Logo/SiteColorLogo.png"
-            alt="Site logo"
-            fill
-            className="object-contain"
-          />
+        {/* Right — site logo + powered by */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px", flexShrink: 0 }}>
+          {/* Site logo */}
+          <div
+            style={{
+              position: "relative",
+              width: "clamp(52px, 6vw, 90px)",
+              aspectRatio: "1 / 1",
+            }}
+          >
+            <Image
+              src="/images/sections/SplashScreen/Logo/SiteColorLogo.png"
+              alt="Site logo"
+              fill
+              className="object-contain"
+            />
+          </div>
+
+          {/* Powered by row */}
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <p
+              style={{
+                fontFamily: "var(--font-primary)",
+                fontSize: "clamp(8px, 0.6vw, 10px)",
+                fontWeight: "500",
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "#C9963A",
+                margin: 0,
+                whiteSpace: "nowrap",
+              }}
+            >
+              Powered by
+            </p>
+            <div
+              style={{
+                position: "relative",
+                width: "clamp(44px, 4.5vw, 68px)",
+                height: "clamp(11px, 1.1vw, 17px)",
+                flexShrink: 0,
+              }}
+            >
+              <Image
+                src="/VercelPowered.png"
+                alt="Powered by Vercel"
+                fill
+                className="object-contain object-left"
+              />
+            </div>
+          </div>
         </div>
       </motion.footer>
     </section>

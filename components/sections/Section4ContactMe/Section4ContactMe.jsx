@@ -124,7 +124,8 @@ export default function Section4ContactMe() {
   return (
     <section
       id="contact"
-      className="w-screen min-h-screen flex items-center justify-center px-6 md:px-16 py-20 overflow-hidden"
+      className="w-screen min-h-screen flex flex-col justify-center px-6 md:px-16 overflow-hidden"
+      style={{ paddingTop: "clamp(60px, 12vh, 120px)", paddingBottom: "clamp(60px, 8vh, 120px)" }}
     >
       <style>{`
         input:-webkit-autofill,
@@ -144,7 +145,7 @@ export default function Section4ContactMe() {
         viewport={{ once: false, amount: 0.25 }}
         transition={{ duration: 1.15, ease: [0.76, 0, 0.24, 1] }}
         className="w-full flex items-stretch gap-15"
-        style={{ maxWidth: "1380px", marginTop: "7vh" }}
+        style={{ maxWidth: "1380px", marginTop: "3vh" }}
       >
 
         {/* Text — left */}
@@ -328,7 +329,8 @@ export default function Section4ContactMe() {
             width: "clamp(225px, 23.5vw, 345px)",
             aspectRatio: "992 / 1580",
             border: "9px solid #C9963A",
-            transform: "scale(1.0)"
+            scale: "0.95" /*Hey its just human, Jesus counts more! 
+            Not every number is perfect. Add the 5 for his Infinite Grace!*/
           }}
         >
           <Image

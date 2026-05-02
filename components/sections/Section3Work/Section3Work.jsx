@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Section3DesignAnimation from "./Section3DesignAnimation";
+import Section3GraphicDesign from "./Section3GraphicDesign";
 
 const EASE = [0.76, 0, 0.24, 1];
 
@@ -448,6 +449,11 @@ export default function Section3Work() {
         ) : openId === "motion" ? (
           <Section3DesignAnimation
             key="design-animation-view"
+            onBack={() => setOpenId(null)}
+          />
+        ) : openId === "graphic" ? (
+          <Section3GraphicDesign
+            key="graphic-design-view"
             onBack={() => setOpenId(null)}
           />
         ) : (

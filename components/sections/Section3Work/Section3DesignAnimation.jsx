@@ -87,15 +87,13 @@ function ProjectPreview({ project }) {
   const [muted, setMuted] = useState(true);
 
   if (project.vimeo) {
-    // Always use background=1 — no Vimeo branding ever
-    // For audio videos, we append &muted=0 or &muted=1 and remount via key
     const src = `https://player.vimeo.com/video/${project.vimeo}?background=1&autoplay=1&loop=1&muted=${muted ? 1 : 0}&byline=0&title=0&portrait=0&controls=0`;
 
     return (
       <div style={{
         width: "100%",
         aspectRatio: "16/9",
-        border: "2.5px solid rgba(201,150,58,0.55)",
+        border: "2.5px solid rgba(201,150,58,1)",
         borderRadius: "4px",
         overflow: "hidden",
         position: "relative",
@@ -116,7 +114,6 @@ function ProjectPreview({ project }) {
           allowFullScreen
         />
 
-        {/* Audio toggle — only shown for videos with audio */}
         {project.hasAudio && (
           <button
             onClick={() => setMuted((m) => !m)}
@@ -128,7 +125,7 @@ function ProjectPreview({ project }) {
               width: "36px",
               height: "36px",
               borderRadius: "50%",
-              background: "rgba(0,0,0,0.55)",
+              background: "rgba(0,0,0,1)",
               border: "1px solid rgba(201,150,58,0.5)",
               cursor: "pointer",
               display: "flex",
@@ -148,14 +145,12 @@ function ProjectPreview({ project }) {
             }}
           >
             {muted ? (
-              // Muted icon
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                 <path d="M11 5L6 9H2v6h4l5 4V5z" stroke="#C9963A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
                 <line x1="23" y1="9" x2="17" y2="15" stroke="#C9963A" strokeWidth="1.8" strokeLinecap="round"/>
                 <line x1="17" y1="9" x2="23" y2="15" stroke="#C9963A" strokeWidth="1.8" strokeLinecap="round"/>
               </svg>
             ) : (
-              // Unmuted icon
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                 <path d="M11 5L6 9H2v6h4l5 4V5z" stroke="#C9963A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
                 <path d="M15.54 8.46a5 5 0 0 1 0 7.07" stroke="#C9963A" strokeWidth="1.8" strokeLinecap="round"/>
@@ -168,12 +163,11 @@ function ProjectPreview({ project }) {
     );
   }
 
-  // Image fallback for projects without vimeo yet
   return (
     <div style={{
       width: "100%",
       aspectRatio: "16/9",
-      border: "2.5px solid rgba(201,150,58,0.55)",
+      border: "2.5px solid rgba(201,150,58,1)",
       borderRadius: "4px",
       overflow: "hidden",
       position: "relative",
@@ -219,10 +213,6 @@ export default function Section3DesignAnimation({ onBack }) {
   const [activeId, setActiveId] = useState(projects[0].id);
   const active = projects.find((p) => p.id === activeId);
 
-  function handleProjectSelect(id) {
-    setActiveId(id);
-  }
-
   return (
     <motion.div
       key="design-animation-view"
@@ -236,9 +226,10 @@ export default function Section3DesignAnimation({ onBack }) {
         display: "flex",
         flexDirection: "column",
         gap: "clamp(20px, 3vh, 36px)",
+        marginTop: "8vh",
       }}
     >
-      {/* back + category title — locked, never moves */}
+      {/* back + category title */}
       <div style={{ display: "flex", alignItems: "center", gap: "20px", flexShrink: 0 }}>
         <motion.button
           whileHover={{ x: -4 }}
@@ -276,7 +267,7 @@ export default function Section3DesignAnimation({ onBack }) {
         </span>
       </div>
 
-      {/* main grid — both columns top-aligned, fixed height so nothing jumps */}
+      {/* main grid */}
       <div style={{
         display: "grid",
         gridTemplateColumns: "1fr 1.6fr",
@@ -295,8 +286,8 @@ export default function Section3DesignAnimation({ onBack }) {
                 initial={{ opacity: 0, x: -24 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.55, delay: 0.1 + i * 0.08, ease: EASE }}
-                onMouseEnter={() => handleProjectSelect(project.id)}
-                onClick={() => handleProjectSelect(project.id)}
+                onMouseEnter={() => setActiveId(project.id)}
+                onClick={() => setActiveId(project.id)}
                 style={{
                   padding: "clamp(16px, 2.2vh, 26px) 0",
                   borderBottom: "1px solid rgba(255,255,255,0.1)",
@@ -347,7 +338,7 @@ export default function Section3DesignAnimation({ onBack }) {
           })}
         </div>
 
-        {/* right: preview + description + button — completely isolated from left layout */}
+        {/* right: preview + description + button */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -359,7 +350,7 @@ export default function Section3DesignAnimation({ onBack }) {
             paddingTop: "clamp(32px, 5vh, 64px)",
           }}
         >
-          {/* video — always same size, crossfade only changes content inside */}
+          {/* video */}
           <div style={{ width: "100%", flexShrink: 0 }}>
             <AnimatePresence mode="wait">
               <motion.div
@@ -374,8 +365,8 @@ export default function Section3DesignAnimation({ onBack }) {
             </AnimatePresence>
           </div>
 
-          {/* description — fixed min-height so button never shifts */}
-          <div style={{ minHeight: "72px" }}>
+          {/* description — fixed height so button stays put */}
+          <div style={{ minHeight: "52px" }}>
             <AnimatePresence mode="wait">
               <motion.p
                 key={active.id + "-desc"}
@@ -397,8 +388,8 @@ export default function Section3DesignAnimation({ onBack }) {
             </AnimatePresence>
           </div>
 
-          {/* button — always in same spot */}
-          <div style={{ flexShrink: 0 }}>
+          {/* button — small top gap from description */}
+          <div style={{ flexShrink: 0, marginTop: "8px" }}>
             <ViewProjectButton url={active.url} />
           </div>
         </motion.div>
