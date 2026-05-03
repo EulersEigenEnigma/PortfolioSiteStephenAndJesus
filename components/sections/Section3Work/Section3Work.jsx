@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Section3DesignAnimation from "./Section3DesignAnimation";
 import Section3GraphicDesign from "./Section3GraphicDesign";
+import Section3PitchDeck from "./Section3PitchDeck";
 
 const EASE = [0.76, 0, 0.24, 1];
 
@@ -118,7 +119,7 @@ function WorkIcon({ item, index, onOpen }) {
         {lit && (
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: [0.25, 0.6, 0.25], scale: [1, 1.06, 1] }}
+            animate={{ opacity: [0.25, 1.2, 0.25], scale: [1, 1.06, 1] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             style={{
               position: "absolute", inset: "-10px", borderRadius: "50%",
@@ -138,7 +139,7 @@ function WorkIcon({ item, index, onOpen }) {
             filter: lit
               ? "brightness(0) saturate(100%) invert(68%) sepia(52%) saturate(500%) hue-rotate(2deg) brightness(95%)"
               : "brightness(0) invert(1)",
-            transition: "filter 0.35s ease",
+            transition: "filter 1.2s ease",
           }}
         />
       </motion.div>
@@ -149,7 +150,7 @@ function WorkIcon({ item, index, onOpen }) {
         letterSpacing: "0.22em",
         textTransform: "uppercase",
         color: lit ? "#C9963A" : "#ffffff",
-        transition: "color 0.35s ease",
+        transition: "color 0.6s ease",
       }}>
         {item.label}
       </span>
@@ -408,7 +409,7 @@ export default function Section3Work() {
                 marginBottom: "clamp(10px, 1.5vh, 18px)",
                 marginTop: "-6vh",
                 cursor: "default",
-                transition: "color 0.35s ease",
+                transition: "color 1.6s ease",
               }}
             >
               Work
@@ -446,6 +447,11 @@ export default function Section3Work() {
               ))}
             </div>
           </motion.div>
+        ) : openId === "pitch" ? (
+          <Section3PitchDeck
+            key="pitch-deck-view"
+            onBack={() => setOpenId(null)}
+          />
         ) : openId === "motion" ? (
           <Section3DesignAnimation
             key="design-animation-view"
