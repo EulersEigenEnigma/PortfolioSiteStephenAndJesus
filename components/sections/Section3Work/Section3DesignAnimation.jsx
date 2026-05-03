@@ -8,13 +8,20 @@ const EASE = [0.76, 0, 0.24, 1];
 const projects = [
   {
     id: "m1",
+    name: "Smile! It Gets Better With Him!",
+    description: "A Logo I Made Using After Effects. I Drew the Logo and Animated It In After Effects. For Those Who Need Hope, Jesus Gives It To Us.",
+    vimeo: "1188871423",
+    url: "https://drive.google.com/file/d/1yPFAc0SzBOAerYqvSDTD9RfU4RT39FsU/view?usp=drive_link",
+  },
+  {
+    id: "m2",
     name: "Website Logo",
     description: "A Logo I Made Using After Effects. I Drew the Logo and Animated It In After Effects.",
     vimeo: "1188374253",
     url: "https://drive.google.com/file/d/1hAJbeo44lCkHEgY9S8uqdIIaHrbKh776/view?usp=drive_link",
   },
   {
-    id: "m2",
+    id: "m3",
     name: "Rhythmic Renders Logo",
     description: "I Designed A Logo For My Senior Thesis Film. Was Inspired By Love For Music and Animation!",
     vimeo: "1188377175",
@@ -22,21 +29,13 @@ const projects = [
     url: "https://drive.google.com/file/d/1dl5lkwodg6u_KNNUNTR_Mmtm7qaccZmZ/view?usp=drive_link",
   },
   {
-    id: "m3",
+    id: "m4",
     name: "FLCL Guitar 3D Design",
     description: "A Fun Project Of Mine! Built this 3D Model, Based On A RickenBacker Guitar From An Animated Show Called FLCL.",
     vimeo: "1188377234",
     hasAudio: false,
     url: "https://drive.google.com/file/d/1uHkGI4PU7HPYM78tf1IY2yf7beTWLJV1/view?usp=drive_link",
-  },
-  {
-    id: "m4",
-    name: "Explainer Animation",
-    description: "2D explainer animation breaking down a crypto platform.",
-    vimeo: null,
-    image: "/projects/motion-4.jpg",
-    url: "#",
-  },
+  }
 ];
 
 function ViewProjectButton({ url }) {

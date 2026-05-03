@@ -16,7 +16,7 @@ const projects = [
   },
   {
     id: "pd2",
-    name: "Design Tech Teachin Demo Slide Deck!",
+    name: "Design Tech Teaching Demo Slide Deck!",
     description: "A Deck Focused On Design Theory. Used For A Educational Demo!",
     embedUrl: "https://docs.google.com/presentation/d/e/2PACX-1vQFTNpfCUXt0l_E02a8qjqqYl4Fc_obv_V02BtBKE6WqEwtUfYZOVPywRuIz3wcPwbiry8pBk0CC15B/pubembed?start=false&loop=false&delayms=10000", 
     pdfUrl: "https://drive.google.com/file/d/1OzJEapHmaRU4LuoUA3FtSuYrkHEQM7QC/view?usp=drive_link",      // swap with your PDF link,  // swap with your Credits link

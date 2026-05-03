@@ -9,7 +9,7 @@ const projects = [
   {
     id: "g1",
     name: "Selah Demo Album Cover",
-    description: "AN ALBUM COVER I DESIGNED BASED ON VINTAGE ALBUM RECORDS. MADE THROUGH PHOTOPEA (PHOTOSHOP ALTERNATIVE).",
+    description: "An Album Cover I Designed Based On Vintage Album Records. Made Through Photopea (Photoshop Alternative).",
     image: "/images/sections/Section3GraphicDesigns/PolaroidCover_Selah.png",
     width: 2400,
     height: 2400,
@@ -18,7 +18,7 @@ const projects = [
   {
     id: "g2",
     name: "Birthday Greeting",
-    description: "A BIRTHDAY GREETING FOR A FAMILY FRIEND. MADE THROUGH PHOTOPEA (PHOTOSHOP ALTERNATIVE).",
+    description: "A Birthday Greeting For A Family Friend. Made Through Photopea (Photoshop Alternative).",
     image: "/images/sections/Section3GraphicDesigns/Salin's Gift.png",
     width: 3600,
     height: 2400,
@@ -27,7 +27,7 @@ const projects = [
   {
     id: "g3",
     name: "Food Tour Poster",
-    description: "A FOOD TOUR POSTER, I CREATED FOR AN ASIAN FOOD EXPERIENCE HERE IN MUMBAI.",
+    description: "A Food Tour Poster, I Created For An Asian Food Experience Here In Mumbai.",
     image: "/images/sections/Section3GraphicDesigns/TourPosterDesign.png",
     width: 2160,
     height: 2700,
@@ -36,7 +36,7 @@ const projects = [
   {
     id: "g4",
     name: "Bible Verse Encouragement",
-    description: "MY LIFE VERSE, THAT I WANTED TO BLESS OTHERS WITH. DESIGNED AS A POSTER GREETING CARD READY FOR WALLPAPER, BOOKMARKS AND MORE.",
+    description: "My Life Verse, That I Wanted To Bless Others With. Designed As A Poster Greeting Card Ready For Wallpaper, Bookmarks And More.",
     image: "/images/sections/Section3GraphicDesigns/MatchaPhilippians1_6.png",
     width: 2012,
     height: 3024,
