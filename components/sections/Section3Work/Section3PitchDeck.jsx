@@ -8,7 +8,7 @@ const EASE = [0.76, 0, 0.24, 1];
 const projects = [
   {
     id: "pd1",
-    name: "Asia Adventure: Tokyo and Taipei City!",
+    name: "Asia Adventure: Tokyo and Taipei City! Sorry, but this is funny! AHHHH",
     description: "A Short Travel Review Of Two Great Cities!",
     embedUrl: "https://docs.google.com/presentation/d/e/2PACX-1vRMJgxWMQEXIDITb6Z5-gvgQoZz_lMuJsvJCtzcBdIbK2J7l_toeLGKAkyViw6moA_h_EF3z9p411XV/pubembed?start=true&loop=true&delayms=3000", 
     pdfUrl: "https://drive.google.com/file/d/1b84gUbrt9K4rGoISm1C2PTwouHjmy953/view?usp=drive_link",      // swap with your PDF link
