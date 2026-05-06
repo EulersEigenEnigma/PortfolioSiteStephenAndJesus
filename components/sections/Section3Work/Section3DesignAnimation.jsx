@@ -35,6 +35,14 @@ const projects = [
     vimeo: "1188377234",
     hasAudio: false,
     url: "https://drive.google.com/file/d/1uHkGI4PU7HPYM78tf1IY2yf7beTWLJV1/view?usp=drive_link",
+  },
+  {
+    id: "m5",
+    name: "FLCL Guitar 3D Design",
+    description: "A Logo Animation Created for the Web Solely through Framer Motion, Javascript and React!",
+    vimeo: "1189874844",
+    hasAudio: false,
+    url: "https://drive.google.com/file/d/1IcrOaXrQ8mKIHJlCIW62Jzu7A6zf-oLi/view?usp=drive_link",
   }
 ];
 

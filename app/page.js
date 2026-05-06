@@ -3,7 +3,9 @@ import { useState, useEffect } from "react";
 
 import SplashScreen from "@/components/sections/SplashScreen/SplashScreen";
 import Section1Main from "@/components/sections/Section1Main/Section1Main";
+import Section1MainPhone from "@/components/sections/Section1Main/Section1MainPhone";
 import Section2About from "@/components/sections/Section2About/Section2About";
+import Section2AboutPhone from "@/components/sections/Section2About/Section2AboutPhone";
 import Section3Work from "@/components/sections/Section3Work/Section3Work";
 import ParallaxLayout from "@/components/ui/general/ParallaxLayout";
 import NavBar from "@/components/ui/general/NavBar";
@@ -47,18 +49,21 @@ export default function Home() {
 
         <ParallaxLayout>
           <div style={{ scrollSnapAlign: "start", height: "100vh", overflow: "hidden" }}>
-            <Section1Main textReady={textReady} />
+            {isMobile
+              ? <Section1MainPhone textReady={textReady} />
+              : <Section1Main textReady={textReady} />
+            }
+          </div>
+          <div style={{ scrollSnapAlign: "start", minheight: "100vh", overflow: "visible" }}>
+            {isMobile ? <Section2AboutPhone /> : <Section2About />}
           </div>
           <div style={{ scrollSnapAlign: "start", height: "100vh", overflow: "hidden" }}>
-            <Section2About />
-          </div>
-           <div style={{ scrollSnapAlign: "start", height: "100vh", overflow: "hidden" }}>
             <Section2TimelineResume />
           </div>
           <div style={{ scrollSnapAlign: "start", height: "100vh", overflow: "hidden" }}>
             <Section3Work />
           </div>
-           <div style={{ scrollSnapAlign: "start", height: "100vh", overflow: "hidden" }}>
+          <div style={{ scrollSnapAlign: "start", height: "100vh", overflow: "hidden" }}>
             <Section4ContactMe />
           </div>
           <div style={{ scrollSnapAlign: "start", height: "100vh", overflow: "hidden" }}>
