@@ -68,7 +68,7 @@ function ViewProjectButton({ url }) {
         fontSize: 14,
         fontWeight: 600,
         letterSpacing: "0.18em",
-        textTransform: "none",
+        textTransform: "uppercase",
         color: "#ffffff",
         background: hovered || pressed ? "rgba(201,150,58,0.85)" : "#C9963A",
         border: "2px solid #C9963A",
@@ -287,7 +287,7 @@ export default function Section3GraphicDesign({ onBack }) {
                   color: "#ffffff",
                   lineHeight: 1.7,
                   margin: 0,
-                  textTransform: "uppercase",
+                  textTransform: "none",
                 }}
               >
                 {active.description}
