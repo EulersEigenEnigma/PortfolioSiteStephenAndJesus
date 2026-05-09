@@ -3,21 +3,26 @@ import { useRef, useEffect, useState } from "react";
 
 export default function ParallaxLayout({ children }) {
   const videoRef = useRef(null);
-  const [videoFailed, setVideoFailed] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Force play on iOS — needs to be triggered
+  // Detect mobile
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  // Force play on iOS
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
     const tryPlay = () => {
-      video.play().catch(() => setVideoFailed(true));
+      video.play().catch(() => {});
     };
 
-    // Try immediately
     tryPlay();
-
-    // Also try on first user interaction (iOS fallback)
     document.addEventListener("touchstart", tryPlay, { once: true });
     document.addEventListener("click", tryPlay, { once: true });
 
@@ -25,7 +30,7 @@ export default function ParallaxLayout({ children }) {
       document.removeEventListener("touchstart", tryPlay);
       document.removeEventListener("click", tryPlay);
     };
-  }, []);
+  }, [isMobile]);
 
   // Smooth loop reset
   useEffect(() => {
@@ -57,6 +62,10 @@ export default function ParallaxLayout({ children }) {
     return () => scrollEl.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const videoSrc = isMobile
+    ? "/images/sections/BG/BGPhoneVideo.mp4"
+    : "/images/sections/BG/BGVideoLoop.mp4";
+
   return (
     <div
       data-scroll-container
@@ -85,36 +94,23 @@ export default function ParallaxLayout({ children }) {
           pointerEvents: "none",
         }}
       >
-        {videoFailed ? (
-          // Fallback if video fails entirely
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              backgroundImage: "url(/images/sections/BG/BGFallback.jpg)",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          />
-        ) : (
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            playsInline
-            loop
-            preload="auto"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center 0%",
-            }}
-            onError={() => setVideoFailed(true)}
-          >
-            <source src="/images/sections/BG/BGVideoLoop.mp4" type="video/mp4" />
-          </video>
-        )}
+        <video
+          key={videoSrc}
+          ref={videoRef}
+          autoPlay
+          muted
+          playsInline
+          loop
+          preload="auto"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center 0%",
+          }}
+        >
+          <source src={videoSrc} type="video/mp4" />
+        </video>
       </div>
 
       {/* Content */}
