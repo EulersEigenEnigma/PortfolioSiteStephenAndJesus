@@ -19,6 +19,7 @@ export default function ParallaxLayout({ children }) {
     if (!video) return;
 
     const tryPlay = () => {
+      video.muted = true;
       video.play().catch(() => {});
     };
 
@@ -45,8 +46,17 @@ export default function ParallaxLayout({ children }) {
     return () => video.removeEventListener("timeupdate", handleTimeUpdate);
   }, []);
 
-  // Scroll → pan video vertically
+  // Scroll → pan video vertically — DESKTOP ONLY
+  // iOS Safari doesn't support fixed video inside scroll containers properly,
+  // so on mobile we leave objectPosition static at "center 50%"
   useEffect(() => {
+    if (isMobile) {
+      // Reset to centre and do nothing
+      const video = videoRef.current;
+      if (video) video.style.objectPosition = "center 50%";
+      return;
+    }
+
     const scrollEl = document.querySelector("[data-scroll-container]");
     const video = videoRef.current;
     if (!scrollEl || !video) return;
@@ -60,7 +70,7 @@ export default function ParallaxLayout({ children }) {
 
     scrollEl.addEventListener("scroll", handleScroll, { passive: true });
     return () => scrollEl.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isMobile]);
 
   const videoSrc = isMobile
     ? "/images/sections/BG/BGPhoneVideo.mp4"
@@ -106,7 +116,7 @@ export default function ParallaxLayout({ children }) {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            objectPosition: "center 0%",
+            objectPosition: "center 50%",
           }}
         >
           <source src={videoSrc} type="video/mp4" />

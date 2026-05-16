@@ -67,13 +67,13 @@ export default function Section2AboutPhone() {
         <p
           style={{
             fontFamily: "var(--font-primary)",
-            fontSize: "clamp(15px, 3.4vw, 20.5px)",
+            fontSize: "clamp(13px, 3.4vw, 19.5px)",
             fontWeight: "500",
             letterSpacing: "0.025em",
             color: "#ffffff",
             lineHeight: 1.78,
             maxWidth: "200%",
-            marginTop: "1vh",
+            marginTop: "2vh",
           }}
         >
            Hey! I&apos;m Stephen — a designer who loves creating with purpose and
@@ -86,12 +86,13 @@ export default function Section2AboutPhone() {
         <p
           style={{
             fontFamily: "var(--font-primary)",
-            fontSize: "clamp(15px, 3.4vw, 20.5px)",
+            fontSize: "clamp(13px, 3.4vw, 19.5px)",
             fontWeight: "500",
             letterSpacing: "0.025em",
             color: "#ffffff",
             lineHeight: 1.78,
             maxWidth: "200%",
+            marginTop: "3vh",
           }}
         >
           Outside of work I'm pretty simple — a good Tuna sandwich, Oasis or

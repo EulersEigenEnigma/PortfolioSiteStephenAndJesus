@@ -92,6 +92,7 @@ export default function Section1MainPhone({ textReady }) {
           animate={textReady ? "visible" : "hidden"}
           onMouseEnter={() => setArrowHovered(true)}
           onMouseLeave={() => setArrowHovered(false)}
+          style={{ marginBottom: "4vh" }}
         >
           <ScrollArrow
             onClick={() => {

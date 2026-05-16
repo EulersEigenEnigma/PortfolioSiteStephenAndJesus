@@ -173,7 +173,7 @@ function ZigZagRow({ point, isLeft, isFirst, active, onClick, starRef, rowRef })
       {isLeft ? (
         // LEFT: [padding] [card]---[star] [flex]
         <>
-          <div style={{ width: 16, flexShrink: 0 }} />
+          <div style={{ width: 30, flexShrink: 0 }} />
           <Card point={point} active={active} hovered={hovered} />
           <div style={{
             width: CONNECTOR_GAP,
@@ -208,7 +208,7 @@ function ZigZagRow({ point, isLeft, isFirst, active, onClick, starRef, rowRef })
             transition: "background 0.3s",
           }} />
           <Card point={point} active={active} hovered={hovered} />
-          <div style={{ width: 30, flexShrink: 0 }} />
+          <div style={{ width: 16, flexShrink: 0 }} />
         </>
       )}
     </div>
@@ -286,8 +286,8 @@ export default function Section2TimelineResumePhone() {
       style={{
         height: "100vh",
         justifyContent: "center",
-        paddingTop: "5vh",
-        paddingBottom: "6vh",
+        paddingTop: "2vh",
+        paddingBottom: "8vh",
       }}
     >
       <motion.div
