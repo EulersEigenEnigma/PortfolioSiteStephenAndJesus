@@ -36,8 +36,8 @@ export default function ScrollArrow({ onClick }) {
               delay: i * 0.05,
             }}
             style={{
-              width: "20px",
-              height: "20px",
+              width: "30px",
+              height: "30px",
               borderRight: "2.5px solid",
               borderBottom: "2.5px solid",
               transform: "rotate(45deg)",

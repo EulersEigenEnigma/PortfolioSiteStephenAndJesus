@@ -3,10 +3,17 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 export default function Section2AboutPhone() {
+  const textFade = {
+    initial: { opacity: 0, y: 24 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: false, amount: 0.3 },
+    transition: { duration: 0.9, ease: [0.76, 0, 0.24, 1] },
+  };
+
   return (
     <section
       id="about"
-      className="w-screen min-h-screen flex flex-col items-center justify-start px-6 py-12 overflow-y-auto"
+      className="w-screen min-h-screen flex flex-col items-center justify-start px-6 py-10 overflow-y-auto"
     >
       {/* Photo — landscape crop, 80% width */}
       <motion.div
@@ -27,30 +34,25 @@ export default function Section2AboutPhone() {
           alt="Profile"
           fill
           className="object-cover"
-          style = {{objectPosition: "center 10%" }}
+          style={{ objectPosition: "center 10%" }}
           priority
         />
       </motion.div>
 
-      {/* Text — below photo */}
+      {/* Text block — all children share the same whileInView trigger */}
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 28 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.2 }}
-        transition={{ duration: 1.0, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
+        viewport={{ once: false, amount: 0.25 }}
+        transition={{ duration: 1.0, ease: [0.76, 0, 0.24, 1] }}
         className="flex flex-col items-center text-center w-full"
-        style={{ marginTop: "4vh", gap: "3vh" }}
+        style={{ marginTop: "4vh", gap: "2.5vh", paddingBottom: "5vh" }}
       >
         {/* Heading */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.25 }}
-          transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1], delay: 0.25 }}
-          whileHover={{ color: "#C9963A" }}
+        <p
           style={{
             fontFamily: "var(--font-primary)",
-            fontSize: "clamp(28px, 7vw, 42px)",
+            fontSize: "clamp(26px, 6.5vw, 38px)",
             fontWeight: "900",
             letterSpacing: "0.05em",
             textTransform: "uppercase",
@@ -59,69 +61,44 @@ export default function Section2AboutPhone() {
           }}
         >
           About Me
-        </motion.p>
+        </p>
 
-        {/* Paragraph 1 */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.25 }}
-          transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1], delay: 0.35 }}
+        {/* Paragraph 1 — passion + faith + skills */}
+        <p
           style={{
             fontFamily: "var(--font-primary)",
-            fontSize: "clamp(14.5px, 3.8vw, 17px)",
+            fontSize: "clamp(15px, 3.4vw, 20.5px)",
             fontWeight: "500",
-            letterSpacing: "0.03em",
+            letterSpacing: "0.025em",
             color: "#ffffff",
-            lineHeight: 1.82,
+            lineHeight: 1.78,
+            maxWidth: "200%",
+            marginTop: "1vh",
           }}
         >
-          Hey! My name is Stephen. I love design with a passion, and I consider
-          it a blessing to do this with Jesus. I love creatively designing and
-          visualizing innovative solutions to help people using my 2D and 3D skills.
-        </motion.p>
-
-        {/* Paragraph 2 */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.25 }}
-          transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1], delay: 0.45 }}
+           Hey! I&apos;m Stephen — a designer who loves creating with purpose and
+          doing it all with&nbsp;Jesus. I specialise in Pitch Decks for any
+          design needs, Design Animations, and Graphic Design, using both 2D
+          and 3D skills to achieve this! I&apos;m also flexible for other
+          design needs if required.
+        </p>
+        {/* Paragraph 2 — personality */}
+        <p
           style={{
             fontFamily: "var(--font-primary)",
-            fontSize: "clamp(14.5px, 3.8vw, 17px)",
+            fontSize: "clamp(15px, 3.4vw, 20.5px)",
             fontWeight: "500",
-            letterSpacing: "0.03em",
+            letterSpacing: "0.025em",
             color: "#ffffff",
-            lineHeight: 1.82,
+            lineHeight: 1.78,
+            maxWidth: "200%",
           }}
         >
-          Currently, I specialize in Pitch Decks creation, Design Animations, and
-          Graphic Designs. However, I am also willing to see how we can work
-          creatively on a project as well!
-        </motion.p>
-
-        {/* Paragraph 3 */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.25 }}
-          transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1], delay: 0.55 }}
-          style={{
-            fontFamily: "var(--font-primary)",
-            fontSize: "clamp(14.5px, 3.8vw, 17px)",
-            fontWeight: "500",
-            letterSpacing: "0.03em",
-            color: "#ffffff",
-            lineHeight: 1.82,
-            paddingBottom: "4vh",
-          }}
-        >
-          As for me, I'm a simple guy. I love a good Tuna sandwich, some
-          Oasis songs or Worship Music, Math, and Theology. I love meeting new
-          people and making friends because that's the beauty of life — people
-          and culture!
-        </motion.p>
+          Outside of work I'm pretty simple — a good Tuna sandwich, Oasis or
+          Worship Music, Maths, and Theology. I love meeting new people,
+          because at the end of the day it's people and culture that make
+          life beautiful.
+        </p>
       </motion.div>
     </section>
   );

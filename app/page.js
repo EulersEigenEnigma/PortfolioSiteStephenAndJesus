@@ -11,6 +11,7 @@ import ParallaxLayout from "@/components/ui/general/ParallaxLayout";
 import NavBar from "@/components/ui/general/NavBar";
 import NavBarPhone from "@/components/ui/general/NavBarPhone";
 import Section2TimelineResume from "@/components/sections/Section2About/Section2TimelineResume";
+import Section2TimelineResumePhone from "@/components/sections/Section2About/Section2TimelineResumePhone";
 import Section4ContactMe from "@/components/sections/Section4ContactMe/Section4ContactMe";
 import Section5Footer from "@/components/sections/Section5Footer/Section5Footer";
 
@@ -58,7 +59,7 @@ export default function Home() {
             {isMobile ? <Section2AboutPhone /> : <Section2About />}
           </div>
           <div style={{ scrollSnapAlign: "start", height: "100vh", overflow: "hidden" }}>
-            <Section2TimelineResume />
+            {isMobile ? <Section2TimelineResumePhone /> : <Section2TimelineResume />}
           </div>
           <div style={{ scrollSnapAlign: "start", height: "100vh", overflow: "hidden" }}>
             <Section3Work />

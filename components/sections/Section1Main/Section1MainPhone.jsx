@@ -44,7 +44,7 @@ export default function Section1MainPhone({ textReady }) {
         <div />
 
         <motion.div
-          className="text-center px-8 flex flex-col items-center"
+          className="text-center pt-20 px-8 flex flex-col items-center"
           variants={containerVariants}
           initial="hidden"
           animate={textReady ? "visible" : "hidden"}
