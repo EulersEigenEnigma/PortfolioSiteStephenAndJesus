@@ -52,25 +52,25 @@ export default function Home() {
         {textReady && (isMobile ? <NavBarPhone /> : <NavBar />)}
 
         <ParallaxLayout>
-          <div style={{ ...snap, height: "100vh", overflow: "hidden" }}>
+          <div style={{ ...snap, height: isMobile ? "auto" : "100vh", overflow: isMobile ? "visible" : "hidden" }}>
             {isMobile
               ? <Section1MainPhone textReady={textReady} />
               : <Section1Main textReady={textReady} />
             }
           </div>
-          <div style={{ ...snap, minHeight: "100vh", overflow: "visible" }}>
+          <div style={{ ...snap, minHeight: isMobile ? "auto" : "100vh", overflow: "visible" }}>
             {isMobile ? <Section2AboutPhone /> : <Section2About />}
           </div>
-          <div style={{ ...snap, height: "100vh", overflow: "hidden" }}>
+          <div style={{ ...snap, height: isMobile ? "auto" : "100vh", overflow: isMobile ? "visible" : "hidden" }}>
             {isMobile ? <Section2TimelineResumePhone /> : <Section2TimelineResume />}
           </div>
-          <div style={{ ...snap, height: "100vh", overflow: "hidden" }}>
+          <div style={{ ...snap, height: isMobile ? "auto" : "100vh", overflow: isMobile ? "visible" : "hidden" }}>
             <Section3Work />
           </div>
-          <div style={{ ...snap, height: "100vh", overflow: "hidden" }}>
+          <div style={{ ...snap, height: isMobile ? "auto" : "100vh", overflow: isMobile ? "visible" : "hidden" }}>
             <Section4ContactMe />
           </div>
-          <div style={{ ...snap, height: "100vh", overflow: "hidden" }}>
+          <div style={{ ...snap, height: isMobile ? "auto" : "100vh", overflow: isMobile ? "visible" : "hidden" }}>
             <Section5Footer />
           </div>
         </ParallaxLayout>
