@@ -82,7 +82,7 @@ export default function ParallaxLayout({ children }) {
       style={{
         height: "100vh",
         overflowY: "scroll",
-        scrollSnapType: "y mandatory",
+        scrollSnapType: isMobile ? "none" : "y mandatory",
         scrollBehavior: "smooth",
         position: "relative",
         scrollbarWidth: "none",

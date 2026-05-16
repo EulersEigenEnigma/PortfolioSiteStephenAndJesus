@@ -38,6 +38,9 @@ export default function Home() {
     setTimeout(() => setTextReady(true), 700);
   };
 
+  // On desktop: snap each section. On mobile: free scroll, no snapping.
+  const snap = isMobile ? {} : { scrollSnapAlign: "start" };
+
   return (
     <main className="w-screen min-h-screen overflow-x-hidden relative">
       <div
@@ -49,25 +52,25 @@ export default function Home() {
         {textReady && (isMobile ? <NavBarPhone /> : <NavBar />)}
 
         <ParallaxLayout>
-          <div style={{ scrollSnapAlign: "start", height: "100vh", overflow: "hidden" }}>
+          <div style={{ ...snap, height: "100vh", overflow: "hidden" }}>
             {isMobile
               ? <Section1MainPhone textReady={textReady} />
               : <Section1Main textReady={textReady} />
             }
           </div>
-          <div style={{ scrollSnapAlign: "start", minheight: "100vh", overflow: "visible" }}>
+          <div style={{ ...snap, minHeight: "100vh", overflow: "visible" }}>
             {isMobile ? <Section2AboutPhone /> : <Section2About />}
           </div>
-          <div style={{ scrollSnapAlign: "start", height: "100vh", overflow: "hidden" }}>
+          <div style={{ ...snap, height: "100vh", overflow: "hidden" }}>
             {isMobile ? <Section2TimelineResumePhone /> : <Section2TimelineResume />}
           </div>
-          <div style={{ scrollSnapAlign: "start", height: "100vh", overflow: "hidden" }}>
+          <div style={{ ...snap, height: "100vh", overflow: "hidden" }}>
             <Section3Work />
           </div>
-          <div style={{ scrollSnapAlign: "start", height: "100vh", overflow: "hidden" }}>
+          <div style={{ ...snap, height: "100vh", overflow: "hidden" }}>
             <Section4ContactMe />
           </div>
-          <div style={{ scrollSnapAlign: "start", height: "100vh", overflow: "hidden" }}>
+          <div style={{ ...snap, height: "100vh", overflow: "hidden" }}>
             <Section5Footer />
           </div>
         </ParallaxLayout>
