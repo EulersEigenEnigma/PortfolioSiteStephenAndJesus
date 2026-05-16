@@ -1,37 +1,32 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 const POINTS = [
   {
     year: "1999",
     label: "Beginnings",
-    detail:
-      "Born And Raised In India. Studied All My School Years In India, Learning As Much As I Could.",
+    detail: "Born And Raised In India. Studied All My School Years In India, Learning As Much As I Could.",
   },
   {
     year: "2017",
     label: "Philly Diaries",
-    detail:
-      "Started Studying Design And Mathematics At Drexel University, In Philadelphia — A Leap Across Continents!",
+    detail: "Started Studying Design And Mathematics At Drexel University, In Philadelphia — A Leap Across Continents!",
   },
   {
     year: "2021",
     label: "Graduated!",
-    detail:
-      "Graduated With A B.Sc In Computer Animation And Visual Effects. Began Working As A Freelancer!",
+    detail: "Graduated With A B.Sc In Computer Animation And Visual Effects. Began Working As A Freelancer!",
   },
   {
     year: "2022–23",
     label: "Zoic Studios",
-    detail:
-      "Worked As A Render Wrangler at Zoic Studios - Wrangled On Some Really Cool VFX Projects With The Best Folks!",
+    detail: "Worked As A Render Wrangler at Zoic Studios - Wrangled On Some Really Cool VFX Projects With The Best Folks!",
   },
   {
     year: "2023–24",
     label: "Concentrix",
-    detail:
-      "Worked As a 3D Designer At Concentrix Catalyst, Developing Pipelines For Design And Technology.",
+    detail: "Worked As a 3D Designer At Concentrix Catalyst, Developing Pipelines For Design And Technology.",
   },
   {
     year: "2025",
@@ -44,6 +39,11 @@ const POINTS = [
     detail: "Creative Designer and Teacher— Just Working and Enjoying Life!",
   },
 ];
+
+// Star shifts this far left/right from the flex centre
+const STAR_OFFSET = 28;
+// Gap between star edge and card — the horizontal connector spans this
+const CONNECTOR_GAP = 14;
 
 function Star({ active, hovered }) {
   const filled = active || hovered;
@@ -82,30 +82,27 @@ function Card({ point, active, hovered }) {
         transition: "border-color 0.3s, background 0.3s",
         textAlign: "center",
         minWidth: 0,
+        flexShrink: 0,
       }}
     >
-      <div
-        style={{
-          fontFamily: "var(--font-primary)",
-          fontSize: 10.5,
-          fontWeight: 700,
-          color: "#C9963A",
-          letterSpacing: "0.07em",
-          whiteSpace: "nowrap",
-        }}
-      >
+      <div style={{
+        fontFamily: "var(--font-primary)",
+        fontSize: 10.5,
+        fontWeight: 700,
+        color: "#C9963A",
+        letterSpacing: "0.07em",
+        whiteSpace: "nowrap",
+      }}>
         {point.year}
       </div>
-      <div
-        style={{
-          fontFamily: "var(--font-primary)",
-          fontSize: 10,
-          color: "#ffffff",
-          marginTop: 3,
-          lineHeight: 1.3,
-          letterSpacing: "0.02em",
-        }}
-      >
+      <div style={{
+        fontFamily: "var(--font-primary)",
+        fontSize: 10,
+        color: "#ffffff",
+        marginTop: 3,
+        lineHeight: 1.3,
+        letterSpacing: "0.02em",
+      }}>
         {point.label}
       </div>
     </div>
@@ -133,17 +130,17 @@ function ResumeButton() {
       onMouseLeave={() => setHovered(false)}
       style={{
         fontFamily: "var(--font-primary)",
-        fontSize: 12,
+        fontSize: 11,
         fontWeight: 600,
-        letterSpacing: "0.18em",
+        letterSpacing: "0.16em",
         textTransform: "uppercase",
         color: "#ffffff",
         background: hovered || pressed ? "rgba(201,150,58,0.85)" : "#C9963A",
         border: "2px solid #C9963A",
         borderRadius: 7,
-        padding: "10px 32px",
+        padding: "8px 26px",
         cursor: "pointer",
-        boxShadow: hovered || pressed ? "0 0 20px rgba(201,150,58,0.4)" : "none",
+        boxShadow: hovered || pressed ? "0 0 18px rgba(201,150,58,0.4)" : "none",
         transform: pressed ? "scale(0.97)" : "scale(1)",
         transition: "background 0.3s, box-shadow 0.3s, transform 0.2s",
       }}
@@ -153,12 +150,14 @@ function ResumeButton() {
   );
 }
 
-function ZigZagRow({ point, isLeft, isFirst, active, onClick, starRef }) {
+// Row: star offset left/right, horizontal connector line, then card
+function ZigZagRow({ point, isLeft, isFirst, active, onClick, starRef, rowRef }) {
   const [hovered, setHovered] = useState(false);
 
   return (
     <div
-      onClick={onClick}
+      ref={rowRef}
+      onClick={(e) => { e.stopPropagation(); onClick(); }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -171,30 +170,47 @@ function ZigZagRow({ point, isLeft, isFirst, active, onClick, starRef }) {
         zIndex: 1,
       }}
     >
-      {/* Left slot */}
-      <div style={{ flex: 1, display: "flex", justifyContent: "flex-end", paddingRight: 12 }}>
-        {isLeft && <Card point={point} active={active} hovered={hovered} />}
-      </div>
-
-      {/* Star — centre spine */}
-      <div
-        ref={starRef}
-        style={{
-          width: 24,
-          flexShrink: 0,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          zIndex: 2,
-        }}
-      >
-        <Star active={active} hovered={hovered} />
-      </div>
-
-      {/* Right slot */}
-      <div style={{ flex: 1, display: "flex", justifyContent: "flex-start", paddingLeft: 12 }}>
-        {!isLeft && <Card point={point} active={active} hovered={hovered} />}
-      </div>
+      {isLeft ? (
+        // LEFT: [padding] [card]---[star] [flex]
+        <>
+          <div style={{ width: 16, flexShrink: 0 }} />
+          <Card point={point} active={active} hovered={hovered} />
+          <div style={{
+            width: CONNECTOR_GAP,
+            height: 1.5,
+            background: active || hovered ? "rgba(201,150,58,0.8)" : "rgba(201,150,58,0.4)",
+            flexShrink: 0,
+            transition: "background 0.3s",
+          }} />
+          <div
+            ref={starRef}
+            style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2 }}
+          >
+            <Star active={active} hovered={hovered} />
+          </div>
+          <div style={{ flex: 1 }} />
+        </>
+      ) : (
+        // RIGHT: [flex] [star]---[card] [padding]
+        <>
+          <div style={{ flex: 1 }} />
+          <div
+            ref={starRef}
+            style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2 }}
+          >
+            <Star active={active} hovered={hovered} />
+          </div>
+          <div style={{
+            width: CONNECTOR_GAP,
+            height: 1.5,
+            background: active || hovered ? "rgba(201,150,58,0.8)" : "rgba(201,150,58,0.4)",
+            flexShrink: 0,
+            transition: "background 0.3s",
+          }} />
+          <Card point={point} active={active} hovered={hovered} />
+          <div style={{ width: 30, flexShrink: 0 }} />
+        </>
+      )}
     </div>
   );
 }
@@ -203,31 +219,65 @@ export default function Section2TimelineResumePhone() {
   const [active, setActive] = useState(null);
   const trackRef = useRef(null);
   const starRefs = useRef([]);
-  const [lineStyle, setLineStyle] = useState({ top: 0, height: 0 });
+  const rowRefs = useRef([]);
+  const [svgData, setSvgData] = useState({ w: 0, h: 0, segments: "", arrow: "" });
 
+  // Deselect when tapping/clicking outside any row
   useEffect(() => {
-    function measure() {
-      const track = trackRef.current;
-      const first = starRefs.current[0];
-      const last = starRefs.current[POINTS.length - 1];
-      if (!track || !first || !last) return;
-
-      const trackRect = track.getBoundingClientRect();
-      const firstRect = first.getBoundingClientRect();
-      const lastRect = last.getBoundingClientRect();
-
-      const top = firstRect.top + firstRect.height / 2 - trackRect.top;
-      const bottom = lastRect.top + lastRect.height / 2 - trackRect.top;
-      setLineStyle({ top, height: bottom - top });
+    function handleOutside(e) {
+      const clickedRow = rowRefs.current.some((el) => el && el.contains(e.target));
+      if (!clickedRow) setActive(null);
     }
-
-    const id = requestAnimationFrame(() => setTimeout(measure, 50));
-    window.addEventListener("resize", measure);
+    document.addEventListener("click", handleOutside);
+    document.addEventListener("touchstart", handleOutside, { passive: true });
     return () => {
-      cancelAnimationFrame(id);
-      window.removeEventListener("resize", measure);
+      document.removeEventListener("click", handleOutside);
+      document.removeEventListener("touchstart", handleOutside);
     };
   }, []);
+
+  const drawLines = useCallback(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const trackRect = track.getBoundingClientRect();
+
+    const centers = starRefs.current.map((el) => {
+      if (!el) return null;
+      const r = el.getBoundingClientRect();
+      return {
+        x: r.left - trackRect.left + r.width / 2,
+        y: r.top - trackRect.top + r.height / 2,
+      };
+    }).filter(Boolean);
+
+    if (centers.length < 2) return;
+
+    let d = `M ${centers[0].x} ${centers[0].y}`;
+    for (let i = 1; i < centers.length; i++) {
+      d += ` L ${centers[i].x} ${centers[i].y}`;
+    }
+
+    // Arrow goes southeast from last star
+    const last = centers[centers.length - 1];
+    const arrowD = `M ${last.x} ${last.y} L ${last.x + 28} ${last.y + 28}`;
+
+    setSvgData({
+      w: trackRect.width,
+      h: trackRect.height + 40,
+      segments: d,
+      arrow: arrowD,
+    });
+  }, []);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setTimeout(drawLines, 60));
+    window.addEventListener("resize", drawLines);
+    return () => {
+      cancelAnimationFrame(id);
+      window.removeEventListener("resize", drawLines);
+    };
+  }, [drawLines]);
 
   return (
     <section
@@ -237,7 +287,7 @@ export default function Section2TimelineResumePhone() {
         height: "100vh",
         justifyContent: "center",
         paddingTop: "5vh",
-        paddingBottom: "5vh",
+        paddingBottom: "6vh",
       }}
     >
       <motion.div
@@ -246,9 +296,8 @@ export default function Section2TimelineResumePhone() {
         viewport={{ once: false, amount: 0.15 }}
         transition={{ duration: 1.0, ease: [0.76, 0, 0.24, 1] }}
         className="w-full flex flex-col items-center"
-        style={{ gap: 0 }}
       >
-        {/* Heading */}
+        {/* Heading — slightly bigger */}
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -257,13 +306,13 @@ export default function Section2TimelineResumePhone() {
           whileHover={{ color: "#C9963A" }}
           style={{
             fontFamily: "var(--font-primary)",
-            fontSize: "clamp(22px, 5.5vw, 32px)",
+            fontSize: "clamp(32px, 8vw, 44px)",
             fontWeight: 900,
             letterSpacing: "0.1em",
             textTransform: "uppercase",
             color: "#ffffff",
             cursor: "default",
-            marginBottom: "2.5vh",
+            marginBottom: "4vh",
             transition: "color 0.3s ease",
           }}
         >
@@ -272,20 +321,63 @@ export default function Section2TimelineResumePhone() {
 
         {/* Zig-zag track */}
         <div ref={trackRef} style={{ position: "relative", width: "100%" }}>
-          {/* Spine line anchored first→last star */}
-          <div
-            style={{
-              position: "absolute",
-              left: "50%",
-              transform: "translateX(-50%)",
-              top: lineStyle.top,
-              height: lineStyle.height,
-              width: 2,
-              background: "rgba(201,150,58,0.38)",
-              zIndex: 0,
-              pointerEvents: "none",
-            }}
-          />
+
+          {/* SVG spine through every star + downward arrow */}
+          {svgData.segments && (
+            <svg
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: svgData.h,
+                pointerEvents: "none",
+                zIndex: 0,
+                overflow: "visible",
+              }}
+              viewBox={`0 0 ${svgData.w} ${svgData.h}`}
+            >
+              <defs>
+                <marker
+                  id="phone-arrow"
+                  viewBox="0 0 10 10"
+                  refX="5"
+                  refY="5"
+                  markerWidth="8"
+                  markerHeight="8"
+                  orient="auto"
+                >
+                  <path
+                    d="M1 2L6 5L1 8"
+                    fill="none"
+                    stroke="#C9963A"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </marker>
+              </defs>
+
+              <path
+                d={svgData.segments}
+                fill="none"
+                stroke="#C9963A"
+                strokeOpacity="0.5"
+                strokeWidth="2"
+                strokeLinejoin="round"
+              />
+
+              <path
+                d={svgData.arrow}
+                fill="none"
+                stroke="#C9963A"
+                strokeOpacity="0.5"
+                strokeWidth="2"
+                strokeLinecap="round"
+                markerEnd="url(#phone-arrow)"
+              />
+            </svg>
+          )}
 
           {POINTS.map((point, i) => (
             <ZigZagRow
@@ -296,16 +388,17 @@ export default function Section2TimelineResumePhone() {
               active={active === i}
               onClick={() => setActive(active === i ? null : i)}
               starRef={(el) => { starRefs.current[i] = el; }}
+              rowRef={(el) => { rowRefs.current[i] = el; }}
             />
           ))}
         </div>
 
-        {/* Detail panel — fixed height so layout doesn't jump */}
+        {/* Detail panel — fixed height */}
         <div
           style={{
-            height: 56,
+            height: 60,
             width: "100%",
-            marginTop: "2vh",
+            marginTop: "1vh",
             textAlign: "center",
             padding: "0 8px",
             display: "flex",
@@ -324,29 +417,25 @@ export default function Section2TimelineResumePhone() {
                 transition={{ duration: 0.35, ease: [0.76, 0, 0.24, 1] }}
                 style={{ textAlign: "center" }}
               >
-                <p
-                  style={{
-                    fontFamily: "var(--font-primary)",
-                    fontSize: 10,
-                    fontWeight: 700,
-                    color: "#C9963A",
-                    letterSpacing: "0.15em",
-                    textTransform: "uppercase",
-                    marginBottom: 5,
-                  }}
-                >
+                <p style={{
+                  fontFamily: "var(--font-primary)",
+                  fontSize: 10,
+                  fontWeight: 700,
+                  color: "#C9963A",
+                  letterSpacing: "0.15em",
+                  textTransform: "uppercase",
+                  marginBottom: 5,
+                }}>
                   {POINTS[active].year}
                 </p>
-                <p
-                  style={{
-                    fontFamily: "var(--font-primary)",
-                    fontSize: "clamp(11px, 3vw, 13px)",
-                    color: "#ffffff",
-                    lineHeight: 1.65,
-                    maxWidth: "88%",
-                    margin: "0 auto",
-                  }}
-                >
+                <p style={{
+                  fontFamily: "var(--font-primary)",
+                  fontSize: "clamp(11px, 3vw, 13px)",
+                  color: "#ffffff",
+                  lineHeight: 1.65,
+                  maxWidth: "88%",
+                  margin: "0 auto",
+                }}>
                   {POINTS[active].detail}
                 </p>
               </motion.div>
@@ -369,17 +458,15 @@ export default function Section2TimelineResumePhone() {
           </AnimatePresence>
         </div>
 
-        {/* Thin divider */}
-        <div
-          style={{
-            width: "90%",
-            height: 1,
-            background: "rgba(201,150,58,0.2)",
-            margin: "2vh 0",
-          }}
-        />
+        {/* Divider */}
+        <div style={{
+          width: "90%",
+          height: 1,
+          background: "rgba(201,150,58,0.2)",
+          margin: "1vh 0",
+        }} />
 
-        {/* Blurb + Resume button */}
+        {/* Blurb + Resume */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -390,23 +477,20 @@ export default function Section2TimelineResumePhone() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: "1.6vh",
+            gap: "1.2vh",
             textAlign: "center",
           }}
         >
-          <p
-            style={{
-              fontFamily: "var(--font-primary)",
-              fontSize: "clamp(11px, 3vw, 13px)",
-              color: "#ffffff",
-              lineHeight: 1.7,
-              maxWidth: "80%",
-            }}
-          >
+          <p style={{
+            fontFamily: "var(--font-primary)",
+            fontSize: "clamp(11px, 3vw, 13px)",
+            color: "#ffffff",
+            lineHeight: 1.7,
+            maxWidth: "80%",
+          }}>
             While this timeline is a fun way to show my various checkpoints in
             this adventure, feel free to check my resume over here.
           </p>
-
           <ResumeButton />
         </motion.div>
       </motion.div>
